@@ -2,3 +2,14 @@
   font-size: x-large;
   margin-left: 20px;
 }
+
+input {
+  border-radius: 10px;
+  padding: 20px;
+  height: 20px;
+  width: 250px;
+  outline: none;
+  /* border: 5px solid var(--secondary-color); */
+  font-size: 20px;
+  /* color: var(--primary-color); */
+}
