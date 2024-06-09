@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import axios from 'axios';
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
+import { DebounceInput } from 'react-debounce-input';
 
 //////////// State
 // 1. มี 2 states : searchText กับ bookList
@@ -84,18 +85,19 @@ function App() {
   // const debouncedGetBookList = useCallback(debounce(getBookList, 500), []);
 
   // 2. Using lodash อัพเดท debounce
-  const debouncedGetBookList = useCallback(
-    debounce((text) => getBookList(text), 500),
-    []
-  );
+  // const debouncedGetBookList = useCallback(
+  //   debounce((text) => getBookList(text), 500),
+  //   []
+  // );
 
   useEffect(() => {
     if (searchText.trim()) {
-      // getBookList(searchText);
-      debouncedGetBookList(searchText);
-      // }, [searchText]);
+      getBookList(searchText);
+      // debouncedGetBookList(searchText);
     }
-  }, [searchText, debouncedGetBookList]);
+  }, [searchText]);
+  // }
+  // }, [searchText, debouncedGetBookList]);
 
   // console.log(bookList[0].volumeInfo.title);
 
@@ -129,13 +131,25 @@ function App() {
       <h1>Find a Book</h1>
       {/* <div> */}
       <label>
-        <input
+        {/* <input
           id="message-text"
           name="message-text"
           type="text"
           placeholder="Enter book name here first!"
           onChange={handleChange}
           value={searchText}
+        /> */}
+        {/*  3. Using react-debounce-input */}
+        {/* <DebounceInput minLength={2} debounceTimeout={500} ...> */}
+        <DebounceInput
+          minLength={2}
+          id="message-text"
+          name="message-text"
+          type="text"
+          placeholder="Enter book name here first!"
+          onChange={handleChange}
+          value={searchText}
+          debounceTimeout={500}
         />
       </label>
       {content}
