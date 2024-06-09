@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import axios from 'axios';
+import { debounce } from 'lodash';
 
 //////////// State
 // 1. มี 2 states : searchText กับ bookList
@@ -23,19 +24,26 @@ import axios from 'axios';
 //   1.1 ประกาศ debounce function
 //   1.2 excute function ใน component
 /////// 2. Using lodash
-/////// 3. Using Using react-debounce-input
+// 2.1 npm i lodash
+// 2.2 import {debounce} from 'lodash'
+// 2.3 อัพเดท debounce ใน request function = debounce(() => {}, 500)
+/////// 3. Using react-debounce-input
+// 3.1 npm i react-debounce-input
+// 3.2 import {DebounceInput} from 'react-debounce-input'
+// 3.3 อัพเดท input เป็น <DebounceInput minLength={2} debounceTimeout={500} ...>
 
-const debounce = (func, delay) => {
-  let timer;
-  return function (...args) {
-    const context = this;
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
-      timer = null;
-      func.apply(context, args);
-    }, delay);
-  };
-};
+// 1. Implementing from scratch
+// const debounce = (func, delay) => {
+//   let timer;
+//   return function (...args) {
+//     const context = this;
+//     if (timer) clearTimeout(timer);
+//     timer = setTimeout(() => {
+//       timer = null;
+//       func.apply(context, args);
+//     }, delay);
+//   };
+// };
 
 function App() {
   const [searchText, setSearchText] = useState('');
@@ -70,15 +78,23 @@ function App() {
     }
   };
 
+  // 1. Implementing from scratch
   // Our debounce will be returning us a new function on every rendering. That we do not want so that we will use the useCallBack hook. It will provide us the memoized callback.
-  const debouncedGetBookList = useCallback(debounce(getBookList, 500), []);
+  // const debouncedHandleChange = useCallback(debounce(handleChange, 500), []);
+  // const debouncedGetBookList = useCallback(debounce(getBookList, 500), []);
+
+  // 2. Using lodash อัพเดท debounce
+  const debouncedGetBookList = useCallback(
+    debounce((text) => getBookList(text), 500),
+    []
+  );
 
   useEffect(() => {
-    // if (searchText.trim()) {
-    // getBookList(searchText);
-    debouncedGetBookList(searchText);
-    // }
-    // }, [searchText]);
+    if (searchText.trim()) {
+      // getBookList(searchText);
+      debouncedGetBookList(searchText);
+      // }, [searchText]);
+    }
   }, [searchText, debouncedGetBookList]);
 
   // console.log(bookList[0].volumeInfo.title);
@@ -111,6 +127,7 @@ function App() {
     <div className="App">
       {/* start coding here */}
       <h1>Find a Book</h1>
+      {/* <div> */}
       <label>
         <input
           id="message-text"
@@ -122,6 +139,7 @@ function App() {
         />
       </label>
       {content}
+      {/* </div> */}
       {/* {searchText.trim() ? (
         <ul>
           {bookList.map((item, index) => {

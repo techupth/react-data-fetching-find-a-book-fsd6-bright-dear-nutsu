@@ -25,7 +25,6 @@ input {
   outline: none;
   /* border: 5px solid var(--secondary-color); */
   font-size: 24px;
-  /* color: var(--primary-color); */
 }
 
 input:hover {
@@ -47,6 +46,8 @@ input:focus {
 }
 
 ul {
+  /* border: 1px solid lightgray;
+  border-radius: 30px; */
   list-style-type: none;
 }
 
