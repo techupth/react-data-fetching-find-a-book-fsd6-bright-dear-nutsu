@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@testing-library/user-event": "^14.4.3",
-    "axios": "^1.4.0",
+    "axios": "^1.7.2",
     "axios-mock-adapter": "^1.21.4",
+    "lodash": "^4.17.21",
     "msw": "^1.2.1",
     "node-fetch": "^3.3.2",
     "pg": "^8.11.3",
     "react": "^18.2.0",
+    "react-debounce-input": "^3.3.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

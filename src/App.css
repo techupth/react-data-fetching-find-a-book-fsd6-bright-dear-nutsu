@@ -1,4 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   font-size: x-large;
-  margin-left: 20px;
+  /* margin-left: 20px; */
+  /* text-align: center; */
+  /* width: 500px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  gap: 30px;
+}
+
+input {
+  border-radius: 30px;
+  border: 10px solid lightgray;
+  padding: 20px;
+  height: 30px;
+  width: 500px;
+  outline: none;
+  /* border: 5px solid var(--secondary-color); */
+  font-size: 24px;
+}
+
+input:hover {
+  border: 10px solid gray;
+}
+input:focus {
+  border: 10px solid gray;
+}
+
+.pleaseEnterText {
+  font-size: 30px;
+  color: blue;
+}
+
+.notFoundText {
+  font-size: 30px;
+  color: crimson;
+  text-align: center;
+}
+
+ul {
+  /* border: 1px solid lightgray;
+  border-radius: 30px; */
+  list-style-type: none;
+}
+
+li {
+  border: 1px solid lightgray;
+  padding: 20px;
+  /* height: 20px; */
+  width: 500px;
+  /* font-size: 16px; */
 }
